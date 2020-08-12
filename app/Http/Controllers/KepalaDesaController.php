@@ -48,7 +48,7 @@ class KepalaDesaController extends Controller
                 'kecamatan' => 'required',
                 'kelurahan_desa' => 'required',
                 'nama_kepala_desa' => 'required|string|max:255',
-                'kontak_desa' => 'required|numeric',
+                'kontak_desa' => 'required|numeric|digits_between:1,13',
                 'password' => 'required|string|min:6'
             ],
             [
@@ -58,7 +58,7 @@ class KepalaDesaController extends Controller
                 'kelurahan_desa.required' => 'Silahkan Pilih Kelurahan/Desa',
                 'nama_kepala_desa.required' => 'Silahkan Isi Nama Anda',
                 'kontak_desa.required' => 'Silahkan Isi Nomor Kontak Desa',
-                'kontak_desa.numeric' => 'Nomor Harus Berupa Angka',
+                'kontak_desa.numeric' => 'Format Nomor Tidak Sesuai',
                 'password.required' => 'Silahkan Isi Password',
                 'password.min' => 'Password Minimal 6 karakter'
 
@@ -72,7 +72,8 @@ class KepalaDesaController extends Controller
                 'kel_desa_id' => $request->kelurahan_desa,
                 'nama_kades' => $request->nama_kepala_desa,
                 'no_hp_kades' => $request->kontak_desa,
-                'password' => bcrypt($request->password)
+                'password' => bcrypt($request->password),
+                'remember_token' => ''
             ]
 
         );

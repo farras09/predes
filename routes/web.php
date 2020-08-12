@@ -26,6 +26,8 @@ Route::get('/search', 'IndexController@blogSearch');
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
+
+
 // Registration Routes...
 Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 Route::post('register', 'Auth\RegisterController@register');
@@ -35,19 +37,32 @@ Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm'
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home'); //->middleware('auth');;
 
 
+// Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], function () {
 Route::resource('kades', 'KepalaDesaController');
 Route::post('getregency', 'KepalaDesaController@getregency')->name('kades.getregency');
 Route::post('getdistrict', 'KepalaDesaController@getdistrict')->name('kades.getdistrict');
 Route::post('getvillage', 'KepalaDesaController@getvillage')->name('kades.getvillage');
+Route::resource('umkm', 'UmkmController');
+Route::get('/umkm', 'UmkmController@index')->name('umkm'); //->middleware('auth');
 
-Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], function () {
-    Route::get('/', 'HomeController@index')->name('index');
-    Route::resource('users', 'UsersController');
-});
+//});
+
+// Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'auth'], function () {
+//     Route::get('/', 'HomeController@index')->name('index');
+//     Route::resource('users', 'UsersController');
+// });
+
+Route::get('/api/datatable/umkm', 'UmkmController@dataTable')->name('api.datatable.umkm');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/api/datatable/users', 'UsersController@dataTable')->name('api.datatable.users');
 });
+
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

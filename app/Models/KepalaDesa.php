@@ -11,6 +11,6 @@ class KepalaDesa extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'provinsi_id', 'kab_kota_id', 'kecamatan_id', 'kel_desa_id', 'nama_kades', 'no_hp_kades', 'password'
+        'provinsi_id', 'kab_kota_id', 'kecamatan_id', 'kel_desa_id', 'nama_kades', 'no_hp_kades', 'password','remember_token'
     ];
 }

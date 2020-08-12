@@ -13,7 +13,7 @@
         </li>
 
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="UMKM">
-            <a class="nav-link" href="{{ route('umkm') }}">
+            <a class="nav-link" href="{{ route('home') }}">
             <i class="fa fa-fw fa-users"></i>
             <span class="nav-link-text">UMKM</span>
             </a>

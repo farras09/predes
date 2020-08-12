@@ -99,7 +99,7 @@ class UsersController extends Controller
 
         $request['password'] = $request->get('password') ? bcrypt($request->get('password')) : $user->password;
         $request['avatar'] = $request->get('avatar') ? $request->get('avatar') : '/images/user-icon.png';
-        
+
         $user->update($request->all());
 
         return redirect()->route('admin.users.index');
@@ -113,7 +113,7 @@ class UsersController extends Controller
      */
     public function destroy($id)
     {
-        if (! User::destroy($id)) return redirect()->back();
+        if (!User::destroy($id)) return redirect()->back();
         return redirect()->route('admin.users.index');
     }
 
@@ -123,7 +123,7 @@ class UsersController extends Controller
         return DataTables::of($users)
             ->addColumn('user', function ($users) {
                 return '<img src="' . asset('images/user-icon.png') . '" height="32" width="32">' .
-                $users->name;
+                    $users->name;
             })
             ->addColumn('action', function ($users) {
                 return view('layouts.admin.partials._action', [
